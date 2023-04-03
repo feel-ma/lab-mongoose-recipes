@@ -5,7 +5,7 @@ const Recipe = require('./models/Recipe.model');
 // Import of the data from './data.json'
 const data = require('./data');
 
-const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
+const MONGODB_URI = 'mongodb+srv://Asdf1234:Asdf1234@cluster0.q9zt67y.mongodb.net/test';
 
 // Connection to the database "recipe-app"
 mongoose
@@ -16,8 +16,22 @@ mongoose
     return Recipe.deleteMany()
   })
   .then(() => {
-    // Run your code here, after you have insured that the connection was made
+    Recipe.create({
+      title: 'Lasagne',
+      level: 'intermediate',
+      ingredients: ['lasagne', 'ragu', 'beasciamella', 'grana'],
+      cusine: 'italian',
+      dishType: 'main_course',
+      duration: 40,
+      creator:' Filippo',
+    })
+
   })
+  .then(recipe => console.log('The recipe is saved and its name is: ', receipe.title))  
+  // the above is not working..... if i remove the .title is working, but gives me undefined.. why?
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+  Recipe.insertMany(data)
+  .then(receipes => receipes.forEach(receipe => console.log(receipe.title)))
